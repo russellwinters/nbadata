@@ -1,0 +1,4 @@
+# Requirements necessary to run application: 
+
+beautifulsoup4 >= 4.9.3 #Using newest bs4 package as of Nov 25, 2020
+requests >= 2.25.0 #Using requests package ==> Newest version as of Nov 25, 2020
