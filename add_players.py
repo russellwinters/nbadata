@@ -30,12 +30,8 @@ def add_players_from_roster(team_abbreviation):
         prior_dictionary = {"2384": "dwight-howard", "6440": "tobias-harris"}
 
         for player in players: 
-            # value = player.items()
-            # print(set(player).issubset(set(prior_dictionary)))
-            # print("Player", player)
             if not(set(player).issubset(set(prior_dictionary))):
                 prior_dictionary.update(player)
         
-        # print(prior_dictionary)
         for key in prior_dictionary:
             print({"key": key, "value": prior_dictionary[key]})
