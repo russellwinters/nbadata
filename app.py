@@ -1,13 +1,23 @@
-from rosters import fetch_roster
-from add_players import add_players_from_roster
+from rosters import fetch_roster, ShowTeamAbbrevs
 import sys
 
-args = sys.argv
 
-if(args[1] == "team" and len(args) == 3):
-    fetch_roster(args[2])
-elif (args[1] == "add_players" and len(args) == 3):
-    add_players_from_roster(args[2])
-else: 
-    print("Only team Rosters are supported at the moment. To search for a roster enter 'python3 app.py team <team abbreviation>'")
- 
+def main():
+
+    args = sys.argv
+
+    if len(sys.argv) > 1:  # Check to see if arguement was given
+
+        if(args[1] == "team" and len(args) == 3):
+            fetch_roster(args[2])
+
+        elif(args[1]) == 'show':
+            ShowTeamAbbrevs()
+
+
+  
+    else:
+        print("Only team Rosters are supported at the moment. To search for a roster enter 'python3 app.py team <team abbreviation>'")
+
+if __name__ == '__main__':
+    main()

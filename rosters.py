@@ -37,3 +37,18 @@ def fetch_roster(team_Abbreviation):
 
         print(players)
 
+        
+def ShowTeamAbbrevs():
+    #  Show all available 3 letter team abbreviations and corresponding full team names
+
+    '''
+    Output a full list of 3 letter team name abbreviations on the command line
+    separated by a newline character, in lowercase. Possibly add the functionality to sort
+    by a single character in future
+    '''
+
+    with open('Team_Abbreviations.txt', 'r') as namesFile:
+        
+        lines = namesFile.readlines()
+        for line in lines:
+            print(line)
