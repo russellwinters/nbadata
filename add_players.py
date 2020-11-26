@@ -1,6 +1,7 @@
 from requests import get
 from bs4 import BeautifulSoup
 import sys
+import csv
 
 def add_players_from_roster(team_abbreviation):
     site = get("https://www.espn.com/nba/team/roster/_/name/{}".format(team_abbreviation))
@@ -20,18 +21,20 @@ def add_players_from_roster(team_abbreviation):
         print("The team abbreviation you entered is not valid.")
     else:
         players = []
+        with open("nba_player_list.csv") as prev_file:
+            csv_reader = csv.reader(prev_file, delimiter=',')
+            for row in csv_reader:
+                if row[0] != "player_id":
+                    players.append({"player_id": row[0], "player_name": row[1]})
 
         for link in target_links:
             split_string = link.split("/")
-            single_player = {split_string[-2]: split_string[-1]}
+            single_player = {"player_id": split_string[-2], "player_name": split_string[-1]}
             if not(single_player in players):
                 players.append(single_player)
-        
-        prior_dictionary = {"2384": "dwight-howard", "6440": "tobias-harris"}
 
-        for player in players: 
-            if not(set(player).issubset(set(prior_dictionary))):
-                prior_dictionary.update(player)
+        with open("nba_player_list.csv", "w", encoding="utf-8", newline="") as output_file:
+            fc = csv.DictWriter(output_file, fieldnames=["player_id", "player_name"])
+            fc.writeheader()
+            fc.writerows(players)
         
-        for key in prior_dictionary:
-            print({"key": key, "value": prior_dictionary[key]})
